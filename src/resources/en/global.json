@@ -1,0 +1,16 @@
+{
+  "header": {
+    "title": "Pokedex",
+    "aria-title": "Pokedex"
+  },
+  "loading": "Range is loading...",
+  "label": {
+    "search": "Search pokemon"
+  },
+  "placeholder": {
+    "search": "Search here a pokemon"
+  },
+  "error": {
+    "notpokemon": "Not pokemon aviable"
+  }
+}
