@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
+import { variables } from "../api/endpoints";
 
-export const useFetch = (endPoint) => {
+export const useFetch = (endPoint, query) => {
   const [response, setResponse] = useState(undefined);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
@@ -8,7 +9,12 @@ export const useFetch = (endPoint) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        await fetch(endPoint)
+        await fetch(endPoint, {
+          credentials: "omit",
+          headers: { "Content-Type": "application/json" },
+          body: query,
+          method: "POST",
+        })
           .then((response) => response.json())
           .then((data) => data && setResponse(data));
       } catch (error) {

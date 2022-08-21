@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import trainers from "../../api/trainers.json";
 import { useTranslation } from "react-i18next";
 
-export const Search = () => {
+export const Search = ({ list }) => {
   const [searchedArray, setSearchedArray] = useState("");
   const [searchString, setSearchString] = useState("");
   const { t } = useTranslation("global");
@@ -13,7 +13,7 @@ export const Search = () => {
     }
     if (searchString) {
       const searchedObjects = [];
-      trainers.forEach((singleTrainerObj, index) => {
+      list.data.pokemon_v2_pokemon.forEach((singleTrainerObj, index) => {
         Object.values(singleTrainerObj).every((onlyValues, valIndex) => {
           if (onlyValues.toLowerCase().includes(searchString.toLowerCase())) {
             searchedObjects.push(singleTrainerObj);
