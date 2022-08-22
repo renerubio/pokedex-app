@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import trainers from "../../api/trainers.json";
 import { useTranslation } from "react-i18next";
+import { List } from "../List/List";
 
 export const Search = ({ list }) => {
   const [searchedArray, setSearchedArray] = useState("");
@@ -37,8 +38,8 @@ export const Search = ({ list }) => {
           onChange={(e) => setSearchString(e.target.value)}
           placeholder={t("placeholder.search")}
         />
-        <pre>{JSON.stringify(searchedArray, null, "    ")}</pre>
       </form>
+      {searchedArray && <List list={searchedArray} />}
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import { Search, List } from "../";
+import { Search } from "../";
 import { useFetch } from "../../hooks";
 import {
   POKEAPI_POKEMON_GRAPHQL,
@@ -18,7 +18,6 @@ export const Pokedex = () => {
     <div>
       <h1>{t("header.title")}</h1>
       {loading ? <Loading /> : <Search list={response} />}
-      {loading ? error : <List list={response} />}
     </div>
   );
 };

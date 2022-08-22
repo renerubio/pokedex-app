@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
+import { Card } from "../";
 
 export const List = ({ list } = null) => {
   const [pokemonList, setpokemonList] = useState(null);
   useEffect(() => {
-    if (list?.results) {
-      const pokemonListFormated = list.results.map((pokemon) => (
-        <li key={`pokemon-${pokemon.name}`}>{pokemon.name}</li>
-      ));
+    if (list) {
+      const pokemonListFormated = list.map((pokemon, index) => {
+        return (
+          index < 20 && <Card key={`pokemon-${pokemon.name}`} data={pokemon} />
+        );
+      });
       setpokemonList(pokemonListFormated);
     }
   }, [list]);
@@ -14,7 +17,7 @@ export const List = ({ list } = null) => {
   return (
     <div>
       <h2>Results</h2>
-      {<ul>{pokemonList}</ul>}
+      {pokemonList}
     </div>
   );
 };
