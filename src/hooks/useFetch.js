@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { variables } from "../api/endpoints";
 
 export const useFetch = (endPoint, query) => {
   const [response, setResponse] = useState(undefined);
