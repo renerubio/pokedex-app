@@ -2,33 +2,54 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import {
   POKEAPI_POKEMON_GRAPHQL,
   POKEAPI_POKEMON_LIST_QUERY,
+  POKEAPI_POKEMON_DETAIL_QUERY,
 } from "../api/endpoints";
 
-const initialState = {
-  loading: false,
-  pokemons: [],
-  error: "",
-};
-
-export const fetchPokemons = createAsyncThunk(
-  "pokemons/fetchPokemons",
-  async () => {
-    return await fetch(POKEAPI_POKEMON_GRAPHQL, {
+export const fetchPokemonDetail = createAsyncThunk(
+  "pokemons/fetchPokemonDetail",
+  () => {
+    return fetch(POKEAPI_POKEMON_GRAPHQL, {
       credentials: "omit",
       headers: { "Content-Type": "application/json" },
-      body: POKEAPI_POKEMON_LIST_QUERY,
+      body: POKEAPI_POKEMON_DETAIL_QUERY("charizard"),
       method: "POST",
     })
-      .then((response) => response.json())
+      .then((response) => console.log(response))
       .then((data) => {
-        return data.data.pokemon_v2_pokemon;
+        console.log(data);
+        return data;
       });
   }
 );
 
+export const fetchPokemons = createAsyncThunk("pokemons/fetchPokemons", () => {
+  return fetch(POKEAPI_POKEMON_GRAPHQL, {
+    credentials: "omit",
+    headers: { "Content-Type": "application/json" },
+    body: POKEAPI_POKEMON_LIST_QUERY,
+    method: "POST",
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      return data.data.pokemon_v2_pokemon.map((pokemonItem) => {
+        const { name, pokemon_v2_pokemonsprites } = pokemonItem;
+        const {
+          other: {
+            dream_world: { front_default: image },
+          },
+        } = JSON.parse(pokemon_v2_pokemonsprites[0].sprites);
+        return { name, image };
+      });
+    });
+});
+
 const pokemonSlice = createSlice({
   name: "pokemon",
-  initialState,
+  initialState: {
+    loading: false,
+    pokemons: [],
+    error: "",
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchPokemons.pending, (state) => {
       state.loading = true;

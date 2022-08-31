@@ -1,4 +1,4 @@
-import { Search, Loading } from "../";
+import { Search, Loading, List } from "../";
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,23 +10,22 @@ export const Pokedex = () => {
   const { loading, pokemons, error } = useSelector((state) => {
     return state.pokemons;
   });
+
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(fetchPokemons());
   }, []);
 
   return (
-    <div>
-      <h1>{t("header.title")}</h1>
+    <div className="p-9">
+      <h1 className="text-gray-900 font-bold text-3xl uppercase mb-5">
+        {t("header.title")}
+      </h1>
       {loading && <Loading />}
       {!loading && error ? <div>Error: {error}</div> : null}
-      {!loading && pokemons.length ? (
-        <ul>
-          {pokemons.map((pokemonItem) => (
-            <li key={pokemonItem.name}>{pokemonItem.name}</li>
-          ))}
-        </ul>
-      ) : null}
+      {!loading && pokemons.length ? <Search /> : null}
+      {!loading && pokemons.length ? <List /> : null}
     </div>
   );
 };

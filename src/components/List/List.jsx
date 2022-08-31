@@ -16,8 +16,8 @@ export const List = ({ list } = null) => {
 
   return (
     <div>
-      <h2>Results</h2>
-      {pokemonList}
+      <h2 className="text-gray-800 font-bold text-xl capitalize">Results</h2>
+      {<div className="grid grid-cols-4 gap-4">{pokemonList}</div>}
     </div>
   );
 };
