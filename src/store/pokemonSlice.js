@@ -32,13 +32,13 @@ export const fetchPokemons = createAsyncThunk("pokemons/fetchPokemons", () => {
     .then((response) => response.json())
     .then((data) => {
       return data.data.pokemon_v2_pokemon.map((pokemonItem) => {
-        const { name, pokemon_v2_pokemonsprites } = pokemonItem;
+        const { name, pokemon_v2_pokemonsprites, id } = pokemonItem;
         const {
           other: {
             dream_world: { front_default: image },
           },
         } = JSON.parse(pokemon_v2_pokemonsprites[0].sprites);
-        return { name, image };
+        return { name, image, id };
       });
     });
 });

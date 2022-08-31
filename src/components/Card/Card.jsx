@@ -1,7 +1,7 @@
 import React from "react";
 
 export const Card = ({ data: pokemon }) => {
-  const { name, image } = pokemon;
+  const { name, image, id } = pokemon;
   return (
     name &&
     image && (
@@ -12,7 +12,7 @@ export const Card = ({ data: pokemon }) => {
         </div>
         <div className="px-6 py-2 h-[15%]">
           <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mt-1">
-            {`#${name}`}
+            {`#${id}`}
           </span>
           <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mt-1">
             #pokemon

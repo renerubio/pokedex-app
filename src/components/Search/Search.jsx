@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { List } from "../List/List";
 import { useSelector } from "react-redux";
 
-export const Search = ({ pokemonList }) => {
+export const Search = () => {
   const [searchedArray, setSearchedArray] = useState("");
   const [searchString, setSearchString] = useState("");
   const { t } = useTranslation("global");
@@ -21,12 +21,15 @@ export const Search = ({ pokemonList }) => {
     if (searchString) {
       const searchedObjects = [];
       pokemons.forEach((singlePokemon, index) => {
-        Object.values(singlePokemon).every((onlyValues, valIndex) => {
-          if (onlyValues.toLowerCase().includes(searchString.toLowerCase())) {
-            searchedObjects.push(singlePokemon);
-            return;
+        let arrayOfValues = Object.values(singlePokemon);
+        let found = arrayOfValues.find((value) => {
+          if (
+            String(value).toLowerCase().search(searchString.toLowerCase()) != -1
+          ) {
+            return value;
           }
         });
+        found && searchedObjects.push(singlePokemon);
       });
       setSearchedArray(searchedObjects);
     }

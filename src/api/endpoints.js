@@ -6,6 +6,7 @@ export const POKEAPI_POKEMON_LIST_QUERY = JSON.stringify({
       pokemon_v2_pokemonsprites {
         sprites
       }
+      id
     }
   }`,
 });
