@@ -12,5 +12,12 @@
   },
   "error": {
     "notpokemon": "Not pokemon aviable"
+  },
+  "sort": {
+    "title": "Sort Pokemon by: ",
+    "lowest": "Lowest number (default)",
+    "highest": "Highest number",
+    "A-Z": "A-Z",
+    "Z-A": "Z-A"
   }
 }

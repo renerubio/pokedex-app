@@ -1,11 +1,9 @@
 import { useState, useEffect } from "react";
-import trainers from "../../api/trainers.json";
 import { useTranslation } from "react-i18next";
-import { List } from "../List/List";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { searchResults } from "../../store/pokemonSlice";
 
 export const Search = () => {
-  const [searchedArray, setSearchedArray] = useState("");
   const [searchString, setSearchString] = useState("");
   const { t } = useTranslation("global");
 
@@ -13,11 +11,9 @@ export const Search = () => {
     return state.pokemons;
   });
 
-  useEffect(() => {
-    if (!searchString) {
-      setSearchedArray();
-    }
+  const dispatch = useDispatch();
 
+  useEffect(() => {
     if (searchString) {
       const searchedObjects = [];
       pokemons.forEach((singlePokemon, index) => {
@@ -31,7 +27,7 @@ export const Search = () => {
         });
         found && searchedObjects.push(singlePokemon);
       });
-      setSearchedArray(searchedObjects);
+      dispatch(searchResults(searchedObjects));
     }
   }, [searchString]);
 
@@ -67,7 +63,6 @@ export const Search = () => {
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
         />
       </form>
-      {searchedArray && <List list={searchedArray} />}
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import { Search, Loading, List } from "../";
+import { Search, Loading, List, Sort } from "../";
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,7 +7,7 @@ import { fetchPokemons } from "../../store/pokemonSlice";
 export const Pokedex = () => {
   const { t } = useTranslation("global");
 
-  const { loading, pokemons, error } = useSelector((state) => {
+  const { loading, pokemons, error, searchResults } = useSelector((state) => {
     return state.pokemons;
   });
 
@@ -25,7 +25,8 @@ export const Pokedex = () => {
       {loading && <Loading />}
       {!loading && error ? <div>Error: {error}</div> : null}
       {!loading && pokemons.length ? <Search /> : null}
-      {!loading && pokemons.length ? <List /> : null}
+      {!loading && searchResults.length ? <Sort /> : null}
+      {!loading && searchResults.length ? <List /> : null}
     </div>
   );
 };

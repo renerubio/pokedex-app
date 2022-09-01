@@ -31,7 +31,7 @@ export const fetchPokemons = createAsyncThunk("pokemons/fetchPokemons", () => {
   })
     .then((response) => response.json())
     .then((data) => {
-      return data.data.pokemon_v2_pokemon.map((pokemonItem) => {
+      const dataFormated = data.data.pokemon_v2_pokemon.map((pokemonItem) => {
         const { name, pokemon_v2_pokemonsprites, id } = pokemonItem;
         const {
           other: {
@@ -40,6 +40,7 @@ export const fetchPokemons = createAsyncThunk("pokemons/fetchPokemons", () => {
         } = JSON.parse(pokemon_v2_pokemonsprites[0].sprites);
         return { name, image, id };
       });
+      return dataFormated.filter((pokemonData) => pokemonData.image != null);
     });
 });
 
@@ -49,6 +50,44 @@ const pokemonSlice = createSlice({
     loading: false,
     pokemons: [],
     error: "",
+    searchResults: [],
+  },
+  reducers: {
+    searchResults: (state, action) => {
+      state.searchResults = action.payload;
+    },
+    sortBylowest: (state, action) => {
+      state.searchResults = state.searchResults.sort(function (a, b) {
+        return a.id - b.id;
+      });
+    },
+    sortByhighest: (state, action) => {
+      state.searchResults = state.searchResults.sort(function (a, b) {
+        return b.id - a.id;
+      });
+    },
+    sortByAZ: (state, action) => {
+      state.searchResults = state.searchResults.sort(function (a, b) {
+        if (a.name > b.name) {
+          return 1;
+        }
+        if (a.name < b.name) {
+          return -1;
+        }
+        return 0;
+      });
+    },
+    sortByZA: (state, action) => {
+      state.searchResults = state.searchResults.sort(function (a, b) {
+        if (a.name < b.name) {
+          return 1;
+        }
+        if (a.name > b.name) {
+          return -1;
+        }
+        return 0;
+      });
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchPokemons.pending, (state) => {
@@ -67,4 +106,11 @@ const pokemonSlice = createSlice({
   },
 });
 
+export const {
+  searchResults,
+  sortBylowest,
+  sortByhighest,
+  sortByAZ,
+  sortByZA,
+} = pokemonSlice.actions;
 export default pokemonSlice.reducer;
