@@ -30,16 +30,36 @@ export const fetchPokemons = createAsyncThunk("pokemons/fetchPokemons", () => {
     method: "POST",
   })
     .then((response) => response.json())
-    .then((data) => {
-      const dataFormated = data.data.pokemon_v2_pokemon.map((pokemonItem) => {
-        const { name, pokemon_v2_pokemonsprites, id } = pokemonItem;
-        const {
-          other: {
-            dream_world: { front_default: image },
-          },
-        } = JSON.parse(pokemon_v2_pokemonsprites[0].sprites);
-        return { name, image, id };
-      });
+    .then((responseJson) => {
+      const dataFormated = responseJson.data.pokemon_v2_pokemon.map(
+        (pokemonItem) => {
+          const {
+            name,
+            pokemon_v2_pokemonsprites,
+            id,
+            pokemon_v2_pokemontypes,
+          } = pokemonItem;
+
+          const {
+            other: {
+              dream_world: { front_default: image },
+            },
+          } = JSON.parse(pokemon_v2_pokemonsprites[0].sprites);
+
+          let types = [];
+          switch (pokemon_v2_pokemontypes.length) {
+            case 1:
+              types.push(pokemon_v2_pokemontypes[0].pokemon_v2_type.name);
+              break;
+            case 2:
+              types.push(pokemon_v2_pokemontypes[0].pokemon_v2_type.name);
+              types.push(pokemon_v2_pokemontypes[1].pokemon_v2_type.name);
+              break;
+          }
+
+          return { name, image, id, types };
+        }
+      );
       return dataFormated.filter((pokemonData) => pokemonData.image != null);
     });
 });
@@ -54,6 +74,11 @@ const pokemonSlice = createSlice({
   },
   reducers: {
     searchResults: (state, action) => {
+      state.searchResults = action.payload;
+    },
+    countSearchResults: (state, action) => {
+      const payLoadLenght = action.payload.lenght;
+      console.log(payLoadLenght);
       state.searchResults = action.payload;
     },
     sortBylowest: (state, action) => {

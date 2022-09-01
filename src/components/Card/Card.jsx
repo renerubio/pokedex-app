@@ -1,22 +1,38 @@
-import React from "react";
-
+import colorByType from "../../utils/colorByType";
 export const Card = ({ data: pokemon }) => {
-  const { name, image, id } = pokemon;
+  const { name, image, id, types } = pokemon;
+
   return (
     name &&
     image && (
-      <div className="card p-8 max-w-sm bg-white rounded-lg border border-gray-300 shadow-md dark:bg-gray-300 dark:border-gray-700">
-        <img src={image} alt={name} className="w-auto h-[70%]" />
+      <div
+        className={
+          "card p-4 max-w-sm bg-white rounded-lg border-4 border-gray-300 shadow-md dark:bg-gray-300 dark:border-gray-700 "
+        }
+      >
+        <img
+          src={image}
+          alt={name}
+          className="pokecursor w-auto h-[70%] mx-[auto] mt-1
+          transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 cursor-pointer"
+        />
         <div className="px-6 py-2 first-letter:h-[15%]">
-          <h2 className="text-gray-800 font-bold text-xl capitalize">{name}</h2>
+          <h2 className="text-gray-800 font-bold text-xl capitalize">
+            {`#${id}  ${name}`}
+          </h2>
         </div>
-        <div className="px-6 py-2 h-[15%]">
-          <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mt-1">
-            {`#${id}`}
-          </span>
-          <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mt-1">
-            #pokemon
-          </span>
+        <div className=" px-6 pt-2 h-[15%]">
+          {types.map((type, index) => (
+            <div
+              key={`${type}_${index}`}
+              className={`${colorByType(
+                type,
+                "bg"
+              )}  border inline-block rounded-full px-3 py-1 text-sm font-semibold text-gray-900 mr-2 mt-1`}
+            >
+              {type}
+            </div>
+          ))}
         </div>
       </div>
     )

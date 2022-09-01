@@ -15,17 +15,17 @@ https://pokeapi.co/
 ### Core application:
 
 - ✅ Search for a pokemon
-- Sort Pokemon by: Lowest Number (default), Highest number, A-Z, Z-A
+- ✅ Sort Pokemon by: Lowest Number (default), Highest number, A-Z, Z-A
 - 👾 See the pokemon detail
 - Suprise!
 
 ### Extra mile!
 
 - ✅ Have a state management
-- Follow some collor pallet coding (for future customizing)
+- ✅ Follow some collor pallet coding (for future customizing)
 - Dark version
 - ✅ Use GraphQL
-- Animations
+- ✅ Animations
 - Pagination/Infinity scrolling
 - Unit tests
 - Storybook
