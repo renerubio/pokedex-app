@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { paginate } from "../../store/pokemonSlice";
+import { paginate, setPokemonsPerPage } from "../../store/pokemonSlice";
 import { useTranslation } from "react-i18next";
 
 export const Pagination = () => {
@@ -24,18 +24,42 @@ export const Pagination = () => {
       ? totalPokemons
       : currentPage * pokemonsPerPage;
 
+  const handlePokemonsPerPage = (e) => {
+    const {
+      target: { value },
+    } = e;
+    if (value > 0 && value <= totalPokemons) {
+      dispatch(setPokemonsPerPage(e.target.value));
+      dispatch(paginate(currentPage));
+    }
+  };
+
   return (
     <div className="py-2 justify-self-end">
-      <div>
-        <p className="text-sm text-gray-700 mr-2 mb-2">
-          {t("pagination.showing")}
-          <span className="font-medium">{` ${showing} `}</span>
-          {t("pagination.to")}
-          <span className="font-medium">{` ${to} `}</span>
-          {t("pagination.of")}
-          <span className="font-medium"> {totalPokemons} </span>
-          {t("pagination.results")}
-        </p>
+      <div className="my-2">
+        <span className="text-sm font-medium text-gray-700">
+          {`${t("pagination.showing")} ${showing} 
+            ${t("pagination.to")} ${to} 
+            ${t("pagination.of")} ${totalPokemons} 
+            ${t("pagination.results")} `}
+        </span>
+      </div>
+      <div className="mb-2">
+        <label
+          htmlFor="pokemonPerPage"
+          className="text-sm font-medium text-gray-700"
+        >
+          {`${t("pagination.resultsPerPage")}   `}
+        </label>
+        <input
+          name="pokemonPerPage"
+          type="number"
+          value={pokemonsPerPage}
+          className="w-12"
+          onChange={(e) => {
+            handlePokemonsPerPage(e);
+          }}
+        />
       </div>
       <nav className="block">
         <ul className="flex pl-0 rounded list-none flex-wrap">

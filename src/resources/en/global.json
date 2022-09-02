@@ -23,6 +23,7 @@
     "showing": "Showing",
     "to": "to",
     "of": "of",
-    "results": "results"
+    "results": "total results",
+    "resultsPerPage": "Results per page"
   }
 }

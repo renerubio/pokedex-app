@@ -51,7 +51,7 @@ export const Search = () => {
   return (
     <div className="Search">
       <label
-        htmlFor="site-search"
+        htmlFor="search"
         className="form-label inline-block mb-2 text-gray-700"
       >
         {sampleDone ? (
