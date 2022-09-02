@@ -18,14 +18,8 @@ export const Search = () => {
       const searchedObjects = [];
       pokemons.forEach((singlePokemon, index) => {
         let arrayOfValues = Object.values(singlePokemon);
-        let found = arrayOfValues.find((value) => {
-          if (
-            String(value).toLowerCase().search(searchString.toLowerCase()) != -1
-          ) {
-            return value;
-          }
-        });
-        found && searchedObjects.push(singlePokemon);
+        let found = arrayOfValues[0].search(searchString.toLowerCase());
+        found != -1 && searchedObjects.push(singlePokemon);
       });
       dispatch(searchResults(searchedObjects));
     }
