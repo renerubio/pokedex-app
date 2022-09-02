@@ -71,28 +71,36 @@ const pokemonSlice = createSlice({
     pokemons: [],
     error: "",
     searchResults: [],
+    pokemonsPerPage: 10,
+    totalPokemons: 0,
+    currentPage: 1,
+    resultsByPage: [],
   },
   reducers: {
+    paginate: (state, action) => {
+      const start =
+        action.payload === 1 ? 0 : (action.payload - 1) * state.pokemonsPerPage;
+      const end = start + state.pokemonsPerPage;
+      let searchResultsCopy = [...state.searchResults];
+      state.resultsByPage = searchResultsCopy.slice(start, end);
+      state.currentPage = action.payload;
+    },
     searchResults: (state, action) => {
       state.searchResults = action.payload;
-    },
-    countSearchResults: (state, action) => {
-      const payLoadLenght = action.payload.lenght;
-      console.log(payLoadLenght);
-      state.searchResults = action.payload;
+      state.totalPokemons = action.payload.length;
     },
     sortBylowest: (state, action) => {
-      state.searchResults = state.searchResults.sort(function (a, b) {
+      state.resultsByPage = state.resultsByPage.sort(function (a, b) {
         return a.id - b.id;
       });
     },
     sortByhighest: (state, action) => {
-      state.searchResults = state.searchResults.sort(function (a, b) {
+      state.resultsByPage = state.resultsByPage.sort(function (a, b) {
         return b.id - a.id;
       });
     },
     sortByAZ: (state, action) => {
-      state.searchResults = state.searchResults.sort(function (a, b) {
+      state.resultsByPage = state.resultsByPage.sort(function (a, b) {
         if (a.name > b.name) {
           return 1;
         }
@@ -103,7 +111,7 @@ const pokemonSlice = createSlice({
       });
     },
     sortByZA: (state, action) => {
-      state.searchResults = state.searchResults.sort(function (a, b) {
+      state.resultsByPage = state.resultsByPage.sort(function (a, b) {
         if (a.name < b.name) {
           return 1;
         }
@@ -132,6 +140,8 @@ const pokemonSlice = createSlice({
 });
 
 export const {
+  paginate,
+  resultsByPage,
   searchResults,
   sortBylowest,
   sortByhighest,

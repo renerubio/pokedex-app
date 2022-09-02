@@ -1,24 +1,37 @@
 import { useEffect, useState } from "react";
 import { Card } from "../";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { paginate } from "../../store/pokemonSlice";
 
 export const List = () => {
   const [pokemonList, setpokemonList] = useState(null);
 
-  const { searchResults } = useSelector((state) => {
-    return state.pokemons;
-  });
+  const { searchResults, pokemonsPerPage, resultsByPage } = useSelector(
+    (state) => {
+      return state.pokemons;
+    }
+  );
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (searchResults) {
-      const pokemonListFormated = searchResults.map((pokemon, index) => {
+      dispatch(paginate(1));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (resultsByPage) {
+      const pokemonListFormated = resultsByPage.map((pokemon, index) => {
         return (
-          index < 20 && <Card key={`pokemon-${pokemon.name}`} data={pokemon} />
+          index < pokemonsPerPage && (
+            <Card key={`pokemon-${pokemon.name}`} data={pokemon} />
+          )
         );
       });
       setpokemonList(pokemonListFormated);
     }
-  }, [searchResults]);
+  }, [resultsByPage]);
 
   return <div className="grid grid-cols-4 gap-4 py-8">{pokemonList}</div>;
 };

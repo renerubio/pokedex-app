@@ -1,4 +1,4 @@
-import { Search, Loading, List, Sort } from "../";
+import { Search, Loading, List, Sort, Pagination } from "../";
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -23,10 +23,17 @@ export const Pokedex = () => {
         {t("header.title")}
       </h1>
       {loading && <Loading />}
-      {!loading && error ? <div>Error: {error}</div> : null}
-      {!loading && pokemons.length ? <Search /> : null}
-      {!loading && searchResults.length ? <Sort /> : null}
-      {!loading && searchResults.length ? <List /> : null}
+      {!loading && error && <div>Error: {error}</div>}
+      {!loading && pokemons.length && <Search />}
+      {!loading && searchResults.length > 0 && (
+        <>
+          <div className="grid grid-cols-2 gap-4">
+            <Sort />
+            <Pagination />
+          </div>
+          <List />
+        </>
+      )}
     </div>
   );
 };
