@@ -45,7 +45,6 @@ export const fetchPokemons = createAsyncThunk("pokemons/fetchPokemons", () => {
               dream_world: { front_default: image },
             },
           } = JSON.parse(pokemon_v2_pokemonsprites[0].sprites);
-
           let types = [];
           switch (pokemon_v2_pokemontypes.length) {
             case 1:
@@ -77,6 +76,9 @@ const pokemonSlice = createSlice({
     resultsByPage: [],
   },
   reducers: {
+    setPokemonsPerPage: (state, action) => {
+      state.pokemonsPerPage = action.payload;
+    },
     paginate: (state, action) => {
       const start =
         action.payload === 1 ? 0 : (action.payload - 1) * state.pokemonsPerPage;
@@ -140,6 +142,7 @@ const pokemonSlice = createSlice({
 });
 
 export const {
+  setPokemonsPerPage,
   paginate,
   resultsByPage,
   searchResults,

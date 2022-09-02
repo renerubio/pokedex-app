@@ -31,7 +31,7 @@ export const List = () => {
       });
       setpokemonList(pokemonListFormated);
     }
-  }, [resultsByPage]);
+  }, [resultsByPage, searchResults]);
 
   return <div className="grid grid-cols-4 gap-4 py-8">{pokemonList}</div>;
 };

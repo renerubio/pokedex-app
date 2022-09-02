@@ -27,10 +27,8 @@ export const Pokedex = () => {
       {!loading && pokemons.length && <Search />}
       {!loading && searchResults.length > 0 && (
         <>
-          <div className="grid grid-cols-2 gap-4">
-            <Sort />
-            <Pagination />
-          </div>
+          <Sort />
+          <Pagination />
           <List />
         </>
       )}

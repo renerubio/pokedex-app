@@ -4,18 +4,17 @@
     "aria-title": "Pokedex"
   },
   "loading": "Range is loading...",
-  "label": {
-    "search": "Find a pokemon"
-  },
-  "placeholder": {
-    "search": "Search a pokemon here"
+  "search": {
+    "label": "Find a pokemon",
+    "placeholder": "Search a pokemon here",
+    "howWorks": "How works?"
   },
   "error": {
     "notpokemon": "Not pokemon aviable"
   },
   "sort": {
     "title": "Sort Pokemon by: ",
-    "lowest": "Lowest number (default)",
+    "lowest": "Lowest number",
     "highest": "Highest number",
     "A-Z": "A-Z",
     "Z-A": "Z-A"
