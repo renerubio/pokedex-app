@@ -16,7 +16,7 @@ export const Sort = () => {
 
   return (
     <div>
-      <h2 className="text-gray-800 font-bold text-xl capitalize">
+      <h2 className="text-gray-800 font-bold text-xl capitalize mb-2">
         {t("sort.title")}
       </h2>
       <button onClick={() => dispatch(sortBylowest())} className={buttonClass}>

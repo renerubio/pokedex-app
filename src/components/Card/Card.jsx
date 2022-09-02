@@ -7,7 +7,7 @@ export const Card = ({ data: pokemon }) => {
     image && (
       <div
         className={
-          "card p-4 max-w-sm bg-white rounded-lg border-4 border-gray-300 shadow-md dark:bg-gray-300 dark:border-gray-700 "
+          "card min-h-[30rem] p-4 max-w-sm bg-white rounded-lg border-4 border-gray-300 shadow-md dark:bg-gray-300 dark:border-gray-700 "
         }
       >
         <img
@@ -28,7 +28,7 @@ export const Card = ({ data: pokemon }) => {
               className={`${colorByType(
                 type,
                 "bg"
-              )}  border inline-block rounded-full px-3 py-1 text-sm font-semibold text-gray-900 mr-2 mt-1`}
+              )} border-gray-700 border-2 inline-block rounded-full px-3 py-1 text-sm font-bold text-gray-900 mr-2 mt-1`}
             >
               {type}
             </div>
