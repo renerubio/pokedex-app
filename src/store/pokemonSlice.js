@@ -41,10 +41,13 @@ export const fetchPokemons = createAsyncThunk("pokemons/fetchPokemons", () => {
           } = pokemonItem;
 
           const {
+            front_default: front_default_image,
             other: {
-              dream_world: { front_default: image },
+              dream_world: { front_default: dream_world_image },
+              home: { front_default: home_image },
             },
           } = JSON.parse(pokemon_v2_pokemonsprites[0].sprites);
+
           let types = [];
           switch (pokemon_v2_pokemontypes.length) {
             case 1:
@@ -55,6 +58,12 @@ export const fetchPokemons = createAsyncThunk("pokemons/fetchPokemons", () => {
               types.push(pokemon_v2_pokemontypes[1].pokemon_v2_type.name);
               break;
           }
+
+          const image = dream_world_image
+            ? dream_world_image
+            : home_image
+            ? home_image
+            : front_default_image;
 
           return { name, image, id, types };
         }
