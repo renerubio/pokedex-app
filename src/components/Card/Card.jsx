@@ -1,6 +1,13 @@
 import colorByType from "../../utils/colorByType";
+import imgError from "./fallback-404.png";
+
 export const Card = ({ data: pokemon }) => {
   const { name, image, id, types } = pokemon;
+
+  const handleErrorImg = (e) => {
+    e.target.onerror = null;
+    e.target.src = imgError;
+  };
 
   return (
     name &&
@@ -13,6 +20,7 @@ export const Card = ({ data: pokemon }) => {
         <img
           src={image}
           alt={name}
+          onError={handleErrorImg}
           className="pokecursor w-auto h-[70%] mx-[auto] mt-1
           transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 cursor-pointer"
         />
