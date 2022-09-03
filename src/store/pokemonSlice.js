@@ -23,53 +23,76 @@ export const fetchPokemonDetail = createAsyncThunk(
 );
 
 export const fetchPokemons = createAsyncThunk("pokemons/fetchPokemons", () => {
-  return fetch(POKEAPI_POKEMON_GRAPHQL, {
-    credentials: "omit",
-    headers: { "Content-Type": "application/json" },
-    body: POKEAPI_POKEMON_LIST_QUERY,
-    method: "POST",
-  })
-    .then((response) => response.json())
-    .then((responseJson) => {
-      const dataFormated = responseJson.data.pokemon_v2_pokemon.map(
-        (pokemonItem) => {
-          const {
-            name,
-            pokemon_v2_pokemonsprites,
-            id,
-            pokemon_v2_pokemontypes,
-          } = pokemonItem;
+  if (localStorage.getItem("pokemonGraphQlData") === null) {
+    return fetch(POKEAPI_POKEMON_GRAPHQL, {
+      credentials: "omit",
+      headers: { "Content-Type": "application/json" },
+      body: POKEAPI_POKEMON_LIST_QUERY,
+      method: "POST",
+    })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        const dataFormated = responseJson.data.pokemon_v2_pokemon.map(
+          (pokemonItem) => {
+            const {
+              name,
+              id,
+              weight,
+              height,
+              base_experience,
+              order,
+              pokemon_v2_pokemontypes,
+              pokemon_v2_pokemonabilities,
+              pokemon_v2_pokemonsprites,
+            } = pokemonItem;
 
-          const {
-            front_default: front_default_image,
-            other: {
-              dream_world: { front_default: dream_world_image },
-              home: { front_default: home_image },
-            },
-          } = JSON.parse(pokemon_v2_pokemonsprites[0].sprites);
+            const {
+              front_default: front_default_image,
+              other: {
+                dream_world: { front_default: dream_world_image },
+                home: { front_default: home_image },
+              },
+            } = JSON.parse(pokemon_v2_pokemonsprites[0].sprites);
 
-          let types = [];
-          switch (pokemon_v2_pokemontypes.length) {
-            case 1:
-              types.push(pokemon_v2_pokemontypes[0].pokemon_v2_type.name);
-              break;
-            case 2:
-              types.push(pokemon_v2_pokemontypes[0].pokemon_v2_type.name);
-              types.push(pokemon_v2_pokemontypes[1].pokemon_v2_type.name);
-              break;
+            let types = pokemon_v2_pokemontypes.map((types) => {
+              return types.pokemon_v2_type?.name;
+            });
+
+            let abilities = pokemon_v2_pokemonabilities.map((abilities) => {
+              return abilities.pokemon_v2_ability?.name;
+            });
+
+            const image = dream_world_image
+              ? dream_world_image
+              : home_image
+              ? home_image
+              : front_default_image;
+
+            return {
+              name,
+              id,
+              weight,
+              height,
+              base_experience,
+              order,
+              abilities,
+              types,
+              image,
+            };
           }
-
-          const image = dream_world_image
-            ? dream_world_image
-            : home_image
-            ? home_image
-            : front_default_image;
-
-          return { name, image, id, types };
-        }
-      );
-      return dataFormated.filter((pokemonData) => pokemonData.image != null);
-    });
+        );
+        const dataFiltered = dataFormated.filter(
+          (pokemonData) => pokemonData.image != null
+        );
+        localStorage.setItem(
+          "pokemonGraphQlData",
+          JSON.stringify(dataFiltered)
+        );
+        return dataFiltered;
+      });
+  } else {
+    return JSON.parse(localStorage.getItem("pokemonGraphQlData"));
+  }
 });
 
 const pokemonSlice = createSlice({
@@ -79,12 +102,15 @@ const pokemonSlice = createSlice({
     pokemons: [],
     error: "",
     searchResults: [],
-    pokemonsPerPage: 10,
+    pokemonsPerPage: 20,
     totalPokemons: 0,
     currentPage: 1,
     resultsByPage: [],
   },
   reducers: {
+    pokemonDetail: (state, action) => {
+      console.log(action.payload);
+    },
     setPokemonsPerPage: (state, action) => {
       state.pokemonsPerPage = action.payload;
     },
@@ -138,8 +164,8 @@ const pokemonSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(fetchPokemons.fulfilled, (state, action) => {
-      state.loading = false;
       state.pokemons = action.payload;
+      state.loading = false;
       state.error = "";
     });
     builder.addCase(fetchPokemons.rejected, (state, action) => {
