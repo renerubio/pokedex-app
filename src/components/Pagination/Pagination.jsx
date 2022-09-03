@@ -13,7 +13,6 @@ export const Pagination = () => {
   );
 
   const pageNumbers = [];
-
   for (let i = 1; i <= Math.ceil(totalPokemons / pokemonsPerPage); i++) {
     pageNumbers.push(i);
   }
@@ -23,14 +22,18 @@ export const Pagination = () => {
     currentPage === pageNumbers.at(-1)
       ? totalPokemons
       : currentPage * pokemonsPerPage;
-
+  /**
+   * handlePokemonsPerPage
+   * TODOs
+   * dispach(paginate(param)) -> param shoud be dinamic
+   */
   const handlePokemonsPerPage = (e) => {
     const {
       target: { value },
     } = e;
     if (value > 0 && value <= totalPokemons) {
       dispatch(setPokemonsPerPage(e.target.value));
-      dispatch(paginate(currentPage));
+      dispatch(paginate(1));
     }
   };
 
@@ -46,13 +49,13 @@ export const Pagination = () => {
       </div>
       <div className="mb-2">
         <label
-          htmlFor="pokemonPerPage"
+          htmlFor="pokemonsPerPage"
           className="text-sm font-medium text-gray-700"
         >
           {`${t("pagination.resultsPerPage")}   `}
         </label>
         <input
-          name="pokemonPerPage"
+          name="pokemonsPerPage"
           type="number"
           value={pokemonsPerPage}
           className="w-12"
