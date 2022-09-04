@@ -11,12 +11,14 @@ export const Sort = () => {
   const { t } = useTranslation("global");
   const dispatch = useDispatch();
 
-  const buttonClass =
-    "bg-gray-500 hover:bg-gray-400 text-white font-bold py-2 px-4 mr-2 border-b-4 border-gray-700 hover:border-gray-500 rounded";
+  const buttonClass = `mr-1 bg-gray-200 hover:bg-gray-800 text-gray-800 font-bold py-2 px-4 mx-auto mb-2 border-b-4 border-gray-700 hover:border-gray-500 rounded dark:bg-gray-700 dark:hover:bg-gray-400 dark:text-gray-200 dark:border-gray-900 dark:hover:border-gray-500 `;
 
   return (
-    <div>
-      <h2 className="text-gray-800 font-bold text-xl capitalize mb-2">
+    <div
+      className="bg-gray-100 border-t border-b border-gray-500 text-gray-700 px-4 py-3
+    dark:bg-gray-800 dark:border-gray-500 dark:text-gray-200"
+    >
+      <h2 className="text-gray-800 font-bold text-xl capitalize mb-2 dark:text-gray-200">
         {t("sort.title")}
       </h2>
       <button onClick={() => dispatch(sortBylowest())} className={buttonClass}>

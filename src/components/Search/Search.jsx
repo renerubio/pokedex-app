@@ -49,15 +49,20 @@ export const Search = () => {
   }, [searchString]);
 
   return (
-    <div className="Search">
+    <div
+      className="Search bg-gray-100 border-t border-b border-gray-500 text-gray-700 px-4 py-3
+    dark:bg-gray-800 dark:border-gray-500 dark:text-gray-200"
+    >
       <label
         htmlFor="search"
-        className="form-label inline-block mb-2 text-gray-700"
+        className="form-label inline-block text-gray-800 font-bold text-xl capitalize mb-2 dark:text-gray-200 "
       >
         {sampleDone ? (
-          <b>{t("search.label")}</b>
+          t("search.label")
         ) : (
-          <b className="text-blue-700">{t("search.howWorks")}</b>
+          <b className="text-blue-500 dark:text-blue-900">
+            {t("search.howWorks")}
+          </b>
         )}
       </label>
       <input
@@ -76,15 +81,8 @@ export const Search = () => {
         px-3
         py-1.5
         mb-5
-        text-base
-        font-normal
-        text-gray-700
-        bg-white bg-clip-padding
-        border border-solid border-gray-300
-        rounded
-        transition
-        ease-in-out
-        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+        bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  
+          dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-200 dark:focus:ring-gray-500 dark:focus:border-gray-500"
       />
     </div>
   );

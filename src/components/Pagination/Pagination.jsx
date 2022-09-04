@@ -40,7 +40,7 @@ export const Pagination = () => {
   return (
     <div className="py-2 justify-self-end">
       <div className="my-2">
-        <span className="text-sm font-medium text-gray-700">
+        <span className="text-sm font-medium dark:text-gray-300 text-gray-700">
           {`${t("pagination.showing")} ${showing} 
             ${t("pagination.to")} ${to} 
             ${t("pagination.of")} ${totalPokemons} 
@@ -50,7 +50,7 @@ export const Pagination = () => {
       <div className="mb-2">
         <label
           htmlFor="pokemonsPerPage"
-          className="text-sm font-medium text-gray-700"
+          className="text-sm font-medium dark:text-gray-200 text-gray-700"
         >
           {`${t("pagination.resultsPerPage")}   `}
         </label>
@@ -58,8 +58,8 @@ export const Pagination = () => {
           name="pokemonsPerPage"
           type="number"
           value={pokemonsPerPage}
-          className="w-16  pl-2 py-1 border border-b-4 border-gray-700 
-          hover:bg-gray-200 hover:border-gray-300 rounded"
+          className="w-16 pl-2 py-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500  
+          dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-200 dark:focus:ring-gray-500 dark:focus:border-gray-500"
           onChange={(e) => {
             handlePokemonsPerPage(e);
           }}
@@ -74,8 +74,8 @@ export const Pagination = () => {
                 onClick={() => dispatch(paginate(number))}
                 className={
                   currentPage === number
-                    ? "bg-gray-500 text-white hover:bg-gray-400 relative inline-flex items-center px-4 py-2 border text-sm font-medium border-b-4 border-gray-700 hover:border-gray-500 rounded"
-                    : "bg-white text-gray-400 hover:bg-gray-200 relative inline-flex items-center px-4 py-2 border text-sm font-medium border-b-4 border-gray-700 hover:border-gray-500 rounded"
+                    ? "text-white mr-1 mb-1 bg-gray-800 hover:bg-gray-700 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm md:w-auto sm:w-[40px] px-5 py-2.5 text-center dark:text-gray-200 dark:bg-gray-400 "
+                    : "text-white mr-1 mb-1 bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm md:w-auto sm:w-[40px] px-5 py-2.5 text-center dark:text-gray-200 dark:bg-gray-700 dark:hover:bg-gray-400 dark:focus:ring-gray-800"
                 }
               >
                 {number}

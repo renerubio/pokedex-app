@@ -13,7 +13,7 @@
     "notpokemon": "Not pokemon aviable"
   },
   "sort": {
-    "title": "Sort Pokemon by: ",
+    "title": "Sort Pokemon by",
     "lowest": "Lowest number",
     "highest": "Highest number",
     "A-Z": "A-Z",
@@ -25,5 +25,12 @@
     "of": "of",
     "results": "total results",
     "resultsPerPage": "Results per page"
+  },
+  "details": {
+    "backButton": "Back",
+    "types": "Types: ",
+    "abilities": "Abilities: ",
+    "height": "Height: ",
+    "weight": "Weight: "
   }
 }

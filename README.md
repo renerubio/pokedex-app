@@ -16,15 +16,15 @@ https://pokeapi.co/
 
 - ✅ Search for a pokemon
 - ✅ Sort Pokemon by: Lowest Number (default), Highest number, A-Z, Z-A
-- See the pokemon detail
+- ✅ See the pokemon detail
 - ✅ Display type of pokemon
 
 ### Extra mile!
 
 - ✅ Have a state management
 - ✅ Follow some collor pallet coding (for future customizing)
-- Dark version
-- Mobile Version
+- ✅ Dark version
+- ✅ Mobile Version
 - ✅ Use GraphQL
 - ✅ Animations
 - ✅ Pagination

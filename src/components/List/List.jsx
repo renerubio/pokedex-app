@@ -33,5 +33,9 @@ export const List = () => {
     }
   }, [resultsByPage, searchResults]);
 
-  return <div className="grid grid-cols-4 gap-4 py-8">{pokemonList}</div>;
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-4 gap-4 py-8">
+      {pokemonList}
+    </div>
+  );
 };

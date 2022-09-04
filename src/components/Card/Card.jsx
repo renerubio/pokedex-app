@@ -24,7 +24,7 @@ export const Card = ({ data: pokemon }) => {
     image && (
       <div
         className={
-          "card min-h-[30rem] p-4 max-w-sm bg-white rounded-lg border-4 border-gray-300 shadow-md dark:bg-gray-300 dark:border-gray-700 "
+          "card min-h-[30rem] p-4 max-w-sm bg-white rounded-lg border-4 border-gray-300 shadow-md dark:bg-gray-500 dark:border-gray-200 "
         }
       >
         <img
@@ -37,7 +37,10 @@ export const Card = ({ data: pokemon }) => {
           transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 cursor-pointer"
         />
         <div className="px-6 py-2 first-letter:h-[15%]">
-          <h2 className="text-gray-800 font-bold text-xl capitalize">
+          <h2
+            className="text-gray-800 font-bold text-xl capitalize
+          dark:text-gray-200"
+          >
             {`#${id}  ${name}`}
           </h2>
         </div>
@@ -46,9 +49,9 @@ export const Card = ({ data: pokemon }) => {
             <div
               key={`${type}_${index}`}
               className={`${colorByType(
-                type,
-                "bg"
-              )} border-gray-700 border-2 inline-block rounded-full px-3 py-1 text-sm font-bold text-gray-900 mr-2 mt-1`}
+                type
+              )} border-gray-800 text-gray-900 border-2 inline-block rounded-full px-3 py-1 text-sm font-bold  mr-2 mt-1
+              dark:text-gray-900 dark:border-gray-200`}
             >
               {type}
             </div>
