@@ -41,7 +41,7 @@ export const Search = () => {
       pokemons.forEach((singlePokemon, index) => {
         let arrayOfValues = Object.values(singlePokemon);
         let found = arrayOfValues[0].search(searchString.toLowerCase());
-        found != -1 && searchedObjects.push(singlePokemon);
+        found !== -1 && searchedObjects.push(singlePokemon);
       });
       dispatch(searchResults(searchedObjects));
       dispatch(paginate(1));

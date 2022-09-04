@@ -2,25 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import {
   POKEAPI_POKEMON_GRAPHQL,
   POKEAPI_POKEMON_LIST_QUERY,
-  POKEAPI_POKEMON_DETAIL_QUERY,
 } from "../api/endpoints";
-
-export const fetchPokemonDetail = createAsyncThunk(
-  "pokemons/fetchPokemonDetail",
-  () => {
-    return fetch(POKEAPI_POKEMON_GRAPHQL, {
-      credentials: "omit",
-      headers: { "Content-Type": "application/json" },
-      body: POKEAPI_POKEMON_DETAIL_QUERY("charizard"),
-      method: "POST",
-    })
-      .then((response) => console.log(response))
-      .then((data) => {
-        console.log(data);
-        return data;
-      });
-  }
-);
 
 export const fetchPokemons = createAsyncThunk("pokemons/fetchPokemons", () => {
   if (localStorage.getItem("pokemonGraphQlData") === null) {
@@ -98,6 +80,7 @@ export const fetchPokemons = createAsyncThunk("pokemons/fetchPokemons", () => {
 const pokemonSlice = createSlice({
   name: "pokemon",
   initialState: {
+    pokemonName: "",
     loading: false,
     pokemons: [],
     error: "",
@@ -108,8 +91,11 @@ const pokemonSlice = createSlice({
     resultsByPage: [],
   },
   reducers: {
-    pokemonDetail: (state, action) => {
-      console.log(action.payload);
+    backToSearch: (state) => {
+      state.pokemonName = [];
+    },
+    pokemonName: (state, action) => {
+      state.pokemonName = action.payload;
     },
     setPokemonsPerPage: (state, action) => {
       state.pokemonsPerPage = action.payload;
@@ -126,17 +112,17 @@ const pokemonSlice = createSlice({
       state.searchResults = action.payload;
       state.totalPokemons = action.payload.length;
     },
-    sortBylowest: (state, action) => {
+    sortBylowest: (state) => {
       state.resultsByPage = state.resultsByPage.sort(function (a, b) {
         return a.id - b.id;
       });
     },
-    sortByhighest: (state, action) => {
+    sortByhighest: (state) => {
       state.resultsByPage = state.resultsByPage.sort(function (a, b) {
         return b.id - a.id;
       });
     },
-    sortByAZ: (state, action) => {
+    sortByAZ: (state) => {
       state.resultsByPage = state.resultsByPage.sort(function (a, b) {
         if (a.name > b.name) {
           return 1;
@@ -147,7 +133,7 @@ const pokemonSlice = createSlice({
         return 0;
       });
     },
-    sortByZA: (state, action) => {
+    sortByZA: (state) => {
       state.resultsByPage = state.resultsByPage.sort(function (a, b) {
         if (a.name < b.name) {
           return 1;
@@ -177,6 +163,8 @@ const pokemonSlice = createSlice({
 });
 
 export const {
+  backToSearch,
+  pokemonName,
   setPokemonsPerPage,
   paginate,
   resultsByPage,
@@ -185,5 +173,6 @@ export const {
   sortByhighest,
   sortByAZ,
   sortByZA,
+  pokemons,
 } = pokemonSlice.actions;
 export default pokemonSlice.reducer;

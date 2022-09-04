@@ -1,3 +1,5 @@
+import { useDispatch } from "react-redux";
+import { pokemonName } from "../../store/pokemonSlice";
 import colorByType from "../../utils/colorByType";
 import imgError from "./fallback-404.png";
 
@@ -7,6 +9,14 @@ export const Card = ({ data: pokemon }) => {
   const handleErrorImg = (e) => {
     e.target.onerror = null;
     e.target.src = imgError;
+  };
+
+  const dispatch = useDispatch();
+  const handleClick = (e) => {
+    const {
+      target: { title },
+    } = e;
+    dispatch(pokemonName(title));
   };
 
   return (
@@ -20,7 +30,9 @@ export const Card = ({ data: pokemon }) => {
         <img
           src={image}
           alt={name}
+          title={name}
           onError={handleErrorImg}
+          onClick={handleClick}
           className="pokecursor w-auto h-[70%] mx-[auto] mt-1
           transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 cursor-pointer"
         />

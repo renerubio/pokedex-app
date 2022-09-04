@@ -58,7 +58,8 @@ export const Pagination = () => {
           name="pokemonsPerPage"
           type="number"
           value={pokemonsPerPage}
-          className="w-12"
+          className="w-16  pl-2 py-1 border border-b-4 border-gray-700 
+          hover:bg-gray-200 hover:border-gray-300 rounded"
           onChange={(e) => {
             handlePokemonsPerPage(e);
           }}
