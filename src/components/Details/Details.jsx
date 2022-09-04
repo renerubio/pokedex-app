@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import colorByType from "../../utils/colorByType";
 import { backToSearch } from "../../store/pokemonSlice";
 import { useTranslation } from "react-i18next";
 import { Pills } from "../";
@@ -14,15 +13,19 @@ export const Details = () => {
 
   const dispatch = useDispatch();
 
+  const getPokemonDetailByName = useMemo(() => {
+    const detailData = searchResults.filter((pokemon) => {
+      return pokemon.name === pokemonName && pokemon;
+    });
+    const [pokemonDetail] = detailData;
+    return pokemonDetail;
+  }, [searchResults, pokemonName]);
+
   useEffect(() => {
     if (pokemonName) {
-      const detailData = searchResults.filter((pokemon, index) => {
-        return pokemon.name === pokemonName && pokemon;
-      });
-      const [pokemonDetail] = detailData;
-      setPokemonData(pokemonDetail);
+      setPokemonData(getPokemonDetailByName);
     }
-  }, [pokemonName]);
+  }, [pokemonName, getPokemonDetailByName]);
 
   const handleClick = (e) => {
     dispatch(backToSearch());
