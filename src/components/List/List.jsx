@@ -18,7 +18,7 @@ export const List = () => {
     if (searchResults) {
       dispatch(paginate(1));
     }
-  }, []);
+  }, [searchResults]);
 
   useEffect(() => {
     if (resultsByPage) {

@@ -32,7 +32,7 @@ https://pokeapi.co/
 - Storybook
 - e2e tests
 - Multi API enviroment support (only only production API, but could be easily modified to others url)
-- Have it deployed somewhere (f.e. https://heroku.com/)
+- ✅ Have it deployed https://63151eb580fe053f7e8f1f0b--sensational-profiterole-df9a83.netlify.app/
 - Dockerize it
 - Consume `trainers.json` and display on the pokemon detail which trainers have that pokemon
 - Good application monitoring
