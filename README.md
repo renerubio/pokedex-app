@@ -23,7 +23,7 @@ https://pokeapi.co/
 
 - ✅ Have a state management
 - ✅ Follow some collor pallet coding (for future customizing)
-- ✅ Dark version
+- Theme Light/Dark mode
 - ✅ Mobile Version
 - ✅ Use GraphQL
 - ✅ Animations
@@ -34,5 +34,3 @@ https://pokeapi.co/
 - Multi API enviroment support (only only production API, but could be easily modified to others url)
 - ✅ Have it deployed https://63151eb580fe053f7e8f1f0b--sensational-profiterole-df9a83.netlify.app/
 - Dockerize it
-- Consume `trainers.json` and display on the pokemon detail which trainers have that pokemon
-- Good application monitoring
