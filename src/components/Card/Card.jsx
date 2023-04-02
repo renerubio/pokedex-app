@@ -1,34 +1,38 @@
-import { useDispatch } from "react-redux";
-import { pokemonName } from "../../store/pokemonSlice";
-import colorByType from "../../utils/colorByType";
-import imgError from "./fallback-404.png";
+import { useDispatch } from 'react-redux'
+import { pokemonName } from '../../store/pokemonSlice'
+import colorByType from '../../utils/colorByType'
+import imgError from './fallback-404.png'
+import { useReplace } from '../../hooks'
+import { POKEAPI_POKEMON_SPRITES } from '../../api/endpoints'
 
 export const Card = ({ data: pokemon }) => {
-  const { name, image, id, types } = pokemon;
+  const { name, image, id, types } = pokemon
 
   const handleErrorImg = (e) => {
-    e.target.onerror = null;
-    e.target.src = imgError;
-  };
+    e.target.onerror = null
+    e.target.src = imgError
+  }
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const handleClick = (e) => {
     const {
-      target: { title },
-    } = e;
-    dispatch(pokemonName(title));
-  };
+      target: { title }
+    } = e
+    dispatch(pokemonName(title))
+  }
+
+  const imageFormatted = useReplace(image, '/media/', POKEAPI_POKEMON_SPRITES)
 
   return (
     name &&
     image && (
       <div
         className={
-          "card min-h-[30rem] p-4 max-w-sm bg-white rounded-lg border-4 border-gray-300 shadow-md dark:bg-gray-500 dark:border-gray-200 "
+          'card min-h-[30rem] p-4 max-w-sm bg-white rounded-lg border-4 border-gray-300 shadow-md dark:bg-gray-500 dark:border-gray-200 '
         }
       >
         <img
-          src={image}
+          src={imageFormatted}
           alt={name}
           title={name}
           onError={handleErrorImg}
@@ -59,5 +63,5 @@ export const Card = ({ data: pokemon }) => {
         </div>
       </div>
     )
-  );
-};
+  )
+}

@@ -1,1 +1,2 @@
-export { useFetch } from "./useFetch";
+export { useFetch } from './useFetch'
+export { useReplace } from './useReplace'
