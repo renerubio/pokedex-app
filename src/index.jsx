@@ -12,11 +12,11 @@ import './styles/themes.scss'
 const root = ReactDOM.createRoot(document.getElementById('root'))
 
 root.render(
-    <Provider store={store}>
-        <I18nextProvider i18n={i18next}>
-            <ThemeProvider>
-                <Pokedex />
-            </ThemeProvider>
-        </I18nextProvider>
-    </Provider>
+  <Provider store={store}>
+    <I18nextProvider i18n={i18next}>
+      <ThemeProvider>
+        <Pokedex />
+      </ThemeProvider>
+    </I18nextProvider>
+  </Provider>
 )

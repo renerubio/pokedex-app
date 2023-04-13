@@ -1,36 +1,36 @@
 {
-    "header": {
-        "title": "Pokedex",
-        "aria-title": "Pokedex"
-    },
-    "loading": "Range is loading...",
-    "search": {
-        "label": "Find a pokemon",
-        "placeholder": "Search a pokemon here",
-        "howWorks": "How works?"
-    },
-    "error": {
-        "notpokemon": "Not pokemon aviable"
-    },
-    "sort": {
-        "title": "Sort Pokemon by",
-        "lowest": "Lowest number",
-        "highest": "Highest number",
-        "A-Z": "A-Z",
-        "Z-A": "Z-A"
-    },
-    "pagination": {
-        "showing": "Showing",
-        "to": "to",
-        "of": "of",
-        "results": "total results",
-        "resultsPerPage": "Results per page"
-    },
-    "details": {
-        "backButton": "Back",
-        "types": "Types: ",
-        "abilities": "Abilities: ",
-        "height": "Height: ",
-        "weight": "Weight: "
-    }
+  "header": {
+    "title": "Pokedex",
+    "aria-title": "Pokedex"
+  },
+  "loading": "Range is loading...",
+  "search": {
+    "label": "Find a pokemon",
+    "placeholder": "Search a pokemon here",
+    "howWorks": "How works?"
+  },
+  "error": {
+    "notpokemon": "Not pokemon aviable"
+  },
+  "sort": {
+    "title": "Sort Pokemon by",
+    "lowest": "Lowest number",
+    "highest": "Highest number",
+    "A-Z": "A-Z",
+    "Z-A": "Z-A"
+  },
+  "pagination": {
+    "showing": "Showing",
+    "to": "to",
+    "of": "of",
+    "results": "total results",
+    "resultsPerPage": "Results per page"
+  },
+  "details": {
+    "backButton": "Back",
+    "types": "Types: ",
+    "abilities": "Abilities: ",
+    "height": "Height: ",
+    "weight": "Weight: "
+  }
 }
