@@ -1,16 +1,25 @@
-/* dark-theme.scss */
 :root {
-    --primary-color: #17a2b8;
-    --secondary-color: #343a40;
-    --text-color: #fff;
+    --color-bg-dark: #1f2937;
+    --color-text-dark: #93befa;
+
+    --color-bg-light: #4e6687;
+    --color-text-light: #90bbf7;
 }
 
-body {
-    background-color: var(--secondary-color);
-    color: var(--text-color);
+.dark {
+    background-color: var(--color-bg-dark);
+    color: var(--color-text-dark);
+
+    .title {
+        color: var(--color-text-dark);
+    }
 }
 
-.button {
-    background-color: var(--primary-color);
-    color: #fff;
+.light {
+    background-color: var(--color-bg-light);
+    color: var(--color-text-light);
+
+    .title {
+        color: var(--color-text-light);
+    }
 }

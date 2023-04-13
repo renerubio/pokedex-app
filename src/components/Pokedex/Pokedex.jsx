@@ -1,6 +1,7 @@
 import { Search, Loading, List, Sort, Pagination, Details } from '../'
 import { useTranslation } from 'react-i18next'
-import { useEffect } from 'react'
+import { useEffect, useContext } from 'react'
+import { ThemeContext } from '../../context/Theme'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchPokemons } from '../../store/pokemonSlice'
 
@@ -18,11 +19,21 @@ export const Pokedex = () => {
         dispatch(fetchPokemons())
     }, [])
 
+    const { theme, toggleTheme } = useContext(ThemeContext)
+
     return (
-        <div className='md:p-9 p-5 h-min-[110vh] h-full bg-gray-100 dark:bg-gray-900'>
-            <h1 className='text-gray-800 font-bold text-3xl uppercase mb-5 dark:text-gray-200 '>
-                {t('header.title')}
-            </h1>
+        <div className={`${theme} md:p-9 p-5 h-min-[110vh] h-full`}>
+            <nav className='flex justify-between items-center'>
+                <h1 className='title font-bold text-3xl uppercase mb-5 dark:text-gray-200 '>
+                    {t('header.title')}
+                </h1>
+                <button
+                    onClick={() => toggleTheme()}
+                    className='button rounded-full p-2'
+                >
+                    {theme === 'light' ? '🌙' : '☀️'}
+                </button>
+            </nav>
             {loading && <Loading />}
             {!loading && error && <div>Error: {error}</div>}
 
