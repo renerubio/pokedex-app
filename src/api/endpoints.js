@@ -1,6 +1,6 @@
 export const POKEAPI_POKEMON = 'https://pokeapi.co/api/v2/pokemon?limit=1154'
 export const POKEAPI_POKEMON_LIST_QUERY = JSON.stringify({
-    query: `query {
+  query: `query {
     pokemon_v2_pokemon {
     name
     id
@@ -27,4 +27,4 @@ export const POKEAPI_POKEMON_LIST_QUERY = JSON.stringify({
 
 export const POKEAPI_POKEMON_GRAPHQL = 'https://beta.pokeapi.co/graphql/v1beta'
 export const POKEAPI_POKEMON_SPRITES =
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/'
+  'https://raw.githubusercontent.com/PokeAPI/sprites/master/'
