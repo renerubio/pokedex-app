@@ -1,0 +1,16 @@
+/* dark-theme.scss */
+:root {
+    --primary-color: #17a2b8;
+    --secondary-color: #343a40;
+    --text-color: #fff;
+}
+
+body {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+}
+
+.button {
+    background-color: var(--primary-color);
+    color: #fff;
+}

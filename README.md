@@ -14,7 +14,7 @@ https://pokeapi.co/
 
 ### Core application:
 
-- ✅ Search for a pokemon
+- ✅ Search for a pokemons
 - ✅ Sort Pokemon by: Lowest Number (default), Highest number, A-Z, Z-A
 - ✅ See the pokemon detail
 - ✅ Display type of pokemon
